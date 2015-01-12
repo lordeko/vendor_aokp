@@ -33,8 +33,6 @@ PRODUCT_BOOTANIMATION := vendor/aokp/prebuilt/bootanimation/$(TARGET_BOOTANIMATI
 endif
 endif
 
-SUPERUSER_EMBEDDED := true
-
 # Common overlay
 PRODUCT_PACKAGE_OVERLAYS += vendor/aokp/overlay/common
 
