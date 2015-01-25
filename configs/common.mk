@@ -39,20 +39,6 @@ PRODUCT_PACKAGE_OVERLAYS += vendor/aokp/overlay/common
 # Common dictionaries
 PRODUCT_PACKAGE_OVERLAYS += vendor/aokp/overlay/dictionaries
 
-PRODUCT_PACKAGES += \
-    LatinIME \
-    BluetoothExt \
-    CellBroadcastReceiver \
-    libemoji \
-    LatinImeDictionaryPack \
-    mGerrit \
-    Microbes \
-    Stk \
-    su \
-    SwagPapers \
-    Torch \
-    Eleven
-
 ifeq ($(PRODUCT_GMS_CLIENTID_BASE),)
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.com.google.clientidbase=android-google
@@ -76,6 +62,47 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.build.selinux=1
 
+# Thank you, please drive thru!
+PRODUCT_PROPERTY_OVERRIDES += persist.sys.dun.override=0
+
+ifneq ($(TARGET_BUILD_VARIANT),eng)
+# Enable ADB authentication
+ADDITIONAL_DEFAULT_PROPERTIES += ro.adb.secure=1
+endif
+
+# Backup Tool
+ifneq ($(WITH_GMS),true)
+PRODUCT_COPY_FILES += \
+    vendor/aokp/prebuilt/common/bin/backuptool.sh:install/bin/backuptool.sh \
+    vendor/aokp/prebuilt/common/bin/backuptool.functions:install/bin/backuptool.functions \
+    vendor/aokp/prebuilt/common/bin/50-cm.sh:system/addon.d/50-cm.sh \
+    vendor/aokp/prebuilt/common/bin/blacklist:system/addon.d/blacklist
+endif
+
+# Signature compatibility validation
+PRODUCT_COPY_FILES += \
+    vendor/aokp/prebuilt/common/bin/otasigcheck.sh:install/bin/otasigcheck.sh
+
+# init.d support
+PRODUCT_COPY_FILES += \
+    vendor/aokp/prebuilt/common/etc/init.d/00start:system/etc/init.d/00start \
+    vendor/aokp/prebuilt/common/etc/init.d/01sysctl:system/etc/init.d/01sysctl \
+    vendor/aokp/prebuilt/common/etc/sysctl.conf:system/etc/sysctl.conf \
+    vendor/aokp/prebuilt/common/bin/sysinit:system/bin/sysinit
+
+# userinit support
+PRODUCT_COPY_FILES += \
+    vendor/aokp/prebuilt/common/etc/init.d/90userinit:system/etc/init.d/90userinit
+
+# CM-specific init file
+PRODUCT_COPY_FILES += \
+    vendor/aokp/prebuilt/common/etc/init.local.rc:root/init.aokp.rc \
+
+# Bring in camera effects
+PRODUCT_COPY_FILES +=  \
+    vendor/aokp/prebuilt/common/media/LMprec_508.emd:system/media/LMprec_508.emd \
+    vendor/aokp/prebuilt/common/media/PFFprec_600.emd:system/media/PFFprec_600.emd
+
 # Installer
 PRODUCT_COPY_FILES += \
     vendor/aokp/prebuilt/common/bin/persist.sh:install/bin/persist.sh \
@@ -85,19 +112,56 @@ PRODUCT_COPY_FILES += \
     vendor/aokp/prebuilt/common/lib/libmicrobes_jni.so:system/lib/libmicrobes_jni.so \
     vendor/aokp/prebuilt/common/etc/resolv.conf:system/etc/resolv.conf
 
-# init.d
-PRODUCT_COPY_FILES += \
-    vendor/aokp/prebuilt/common/etc/init.local.rc:root/init.aokp.rc \
-    vendor/aokp/prebuilt/common/etc/init.d/00start:system/etc/init.d/00start \
-    vendor/aokp/prebuilt/common/etc/init.d/01sysctl:system/etc/init.d/01sysctl \
-    vendor/aokp/prebuilt/common/etc/sysctl.conf:system/etc/sysctl.conf \
-    vendor/aokp/prebuilt/common/bin/sysinit:system/bin/sysinit
-
 # Enable SIP+VoIP on all targets
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml
 
-#Tools
+# Enable wireless Xbox 360 controller support
+PRODUCT_COPY_FILES += \
+    frameworks/base/data/keyboards/Vendor_045e_Product_028e.kl:system/usr/keylayout/Vendor_045e_Product_0719.kl
+
+PRODUCT_COPY_FILES += \
+    vendor/aokp/configs/permissions/com.aokp.android.xml:system/etc/permissions/com.aokp.android.xml
+
+# T-Mobile theme engine
+include vendor/aokp/configs/themes_common.mk
+
+# Required AOKP packages
+PRODUCT_PACKAGES += \
+    BluetoothExt \
+    CellBroadcastReceiver \
+    Development \
+    LatinIME \
+    LatinImeDictionaryPack \
+    libemoji \
+    mGerrit \
+    Microbes \
+    Stk \
+    SwagPapers
+
+# Optional AOKP packages
+PRODUCT_PACKAGES += \
+    VoicePlus \
+    Basic \
+    libemoji \
+    Terminal
+
+# Custom CM packages
+PRODUCT_PACKAGES += \
+    Launcher3 \
+    Trebuchet \
+    AudioFX \
+    CMWallpapers \
+    CMFileManager \
+    Eleven \
+    LockClock
+
+# CM Hardware Abstraction Framework
+PRODUCT_PACKAGES += \
+    org.cyanogenmod.hardware \
+    org.cyanogenmod.hardware.xml
+
+# Extra tools in CM
 PRODUCT_PACKAGES += \
     libsepol \
     openvpn \
@@ -137,32 +201,73 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     rsync
 
-
-# Stagefright FFMPEG plugins
+# Stagefright FFMPEG plugin
 PRODUCT_PACKAGES += \
     libstagefright_soft_ffmpegadec \
     libstagefright_soft_ffmpegvdec \
     libFFmpegExtractor \
     libnamparser
 
-# Default ringtone
+# These packages are excluded from user builds
+ifneq ($(TARGET_BUILD_VARIANT),user)
+PRODUCT_PACKAGES += \
+    procmem \
+    procrank \
+    su
+endif
+
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.config.ringtone=Scarabaeus.ogg \
-    ro.config.notification_sound=Antimony.ogg \
-    ro.config.alarm_alert=Scandium.ogg
+    persist.sys.root_access=0
 
-PRODUCT_COPY_FILES += packages/wallpapers/LivePicker/android.software.live_wallpaper.xml:/system/etc/permissions/android.software.live_wallpaper.xml
+PRODUCT_PACKAGE_OVERLAYS += vendor/aokp/overlay/common
 
-# Inherit common build.prop overrides
--include vendor/aokp/configs/common_versions.mk
+PRODUCT_VERSION_MAJOR = 12
+PRODUCT_VERSION_MINOR = 0
+PRODUCT_VERSION_MAINTENANCE = 0-RC0
 
-# T-Mobile theme engine
--include vendor/aokp/configs/themes_common.mk
+
+
+
+# Version information used on all builds
+PRODUCT_BUILD_PROP_OVERRIDES += BUILD_VERSION_TAGS=release-keys USER=android-build BUILD_UTC_DATE=$(shell date +"%s")
+
+DATE = $(shell vendor/aokp/tools/getdate)
+AOKP_BRANCH=mm
+
+ifneq ($(AOKP_BUILDTYPE),)
+    # AOKP_BUILD=<goo version int>/<build string>
+    PRODUCT_PROPERTY_OVERRIDES += \
+        ro.goo.developerid=aokp \
+        ro.goo.rom=aokp \
+        ro.goo.version=$(shell echo $(AOKP_BUILDTYPE) | cut -d/ -f1)
+
+    AOKP_VERSION=$(TARGET_PRODUCT)_$(AOKP_BRANCH)_$(shell echo $(AOKP_BUILDTYPE) | cut -d/ -f2)
+else
+    ifneq ($(AOKP_NIGHTLY),)
+        # AOKP_NIGHTLY=true
+        AOKP_VERSION=$(TARGET_PRODUCT)_$(AOKP_BRANCH)_nightly_$(DATE)
+    else
+        AOKP_VERSION=$(TARGET_PRODUCT)_$(AOKP_BRANCH)_unofficial_$(DATE)
+    endif
+endif
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.aokp.version=$(AOKP_VERSION) \
+    ro.aokp.branch=$(AOKP_BRANCH) \
+    ro.aokp.device=$(AOKP_DEVICE) \
+    ro.aokp.releasetype=$(CM_BUILDTYPE) \
+    ro.modversion=$(AOKP_VERSION) \
+    ro.aokp.display.version=$(AOKP_DISPLAY_VERSION)
+
+-include $(WORKSPACE)/build_env/image-auto-bits.mk
+
+# by default, do not update the recovery with system updates
+PRODUCT_PROPERTY_OVERRIDES += persist.sys.recovery_update=false
+
+# Camera shutter sound property
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.sys.camera-sound=1
 
 # common boot animation
 PRODUCT_COPY_FILES += \
     vendor/aokp/prebuilt/bootanimation/bootanimation-kiernan.zip:system/media/bootanimation-alt.zip
-
-# World APNs
-PRODUCT_COPY_FILES += \
-    vendor/aokp/prebuilt/common/etc/apns-conf.xml:system/etc/apns-conf.xml

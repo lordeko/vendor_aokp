@@ -1,6 +1,6 @@
 #
 # This policy configuration will be used by all products that
-# inherit from CM
+# inherit from AOKP
 #
 
 BOARD_SEPOLICY_DIRS += \
@@ -17,9 +17,12 @@ BOARD_SEPOLICY_UNION += \
     app.te \
     auditd.te \
     bootanim.te \
+    drmserver.te \
     healthd.te \
     hostapd.te \
     installd.te \
+    livedisplay.te \
+    mediaserver.te \
     netd.te \
     property.te \
     recovery.te \
@@ -28,8 +31,10 @@ BOARD_SEPOLICY_UNION += \
     sysinit.te \
     system.te \
     system_app.te \
+    system_server.te \
     ueventd.te \
     uncrypt.te \
+    userinit.te \
     vold.te \
     zygote.te \
     mac_permissions.xml
