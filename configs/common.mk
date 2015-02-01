@@ -216,17 +216,16 @@ PRODUCT_PACKAGES += \
     su
 endif
 
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.sys.root_access=0
+# SuperSU
+PRODUCT_COPY_FILES += \
+    vendor/aokp/prebuilt/common/UPDATE-SuperSU.zip:system/addon.d/UPDATE-SuperSU.zip \
+    vendor/aokp/prebuilt/common/etc/init.d/99SuperSUDaemon:system/etc/init.d/99SuperSUDaemon
 
 PRODUCT_PACKAGE_OVERLAYS += vendor/aokp/overlay/common
 
 PRODUCT_VERSION_MAJOR = 12
 PRODUCT_VERSION_MINOR = 0
 PRODUCT_VERSION_MAINTENANCE = 0-RC0
-
-
-
 
 # Version information used on all builds
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_VERSION_TAGS=release-keys USER=android-build BUILD_UTC_DATE=$(shell date +"%s")
