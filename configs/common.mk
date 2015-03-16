@@ -91,8 +91,10 @@ PRODUCT_COPY_FILES += \
     vendor/aokp/prebuilt/common/bin/sysinit:system/bin/sysinit
 
 # userinit support
+ifneq ($(TARGET_BUILD_VARIANT),user)
 PRODUCT_COPY_FILES += \
     vendor/aokp/prebuilt/common/etc/init.d/90userinit:system/etc/init.d/90userinit
+endif
 
 # CM-specific init file
 PRODUCT_COPY_FILES += \
