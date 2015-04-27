@@ -228,6 +228,17 @@ PRODUCT_VERSION_MAJOR = 12
 PRODUCT_VERSION_MINOR = 0
 PRODUCT_VERSION_MAINTENANCE = 0-RC0
 
+ifeq ($(filter NIGHTLY SNAPSHOT EXPERIMENTAL,$(AOKP_BUILDTYPE)),)
+# CM Platform Library Resource Package
+PRODUCT_PACKAGES += \
+    org.cyanogenmod.platform-res
+
+# CM Platform Library
+PRODUCT_PACKAGES += \
+    org.cyanogenmod.platform \
+    org.cyanogenmod.platform.xml
+endif
+
 # Version information used on all builds
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_VERSION_TAGS=release-keys USER=android-build BUILD_UTC_DATE=$(shell date +"%s")
 
