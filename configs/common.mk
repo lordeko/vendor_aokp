@@ -71,13 +71,13 @@ ADDITIONAL_DEFAULT_PROPERTIES += ro.adb.secure=1
 endif
 
 # Backup Tool
-ifneq ($(WITH_GMS),true)
 PRODUCT_COPY_FILES += \
     vendor/aokp/prebuilt/common/bin/backuptool.sh:install/bin/backuptool.sh \
     vendor/aokp/prebuilt/common/bin/backuptool.functions:install/bin/backuptool.functions \
-    vendor/aokp/prebuilt/common/bin/50-cm.sh:system/addon.d/50-cm.sh \
-    vendor/aokp/prebuilt/common/bin/blacklist:system/addon.d/blacklist
-endif
+    vendor/aokp/prebuilt/common/bin/50-aokp.sh:system/addon.d/50-aokp.sh \
+    vendor/aokp/prebuilt/common/bin/blacklist:system/addon.d/blacklist \
+    vendor/aokp/prebuilt/common/bin/99-backup.sh:system/addon.d/99-backup.sh \
+    vendor/aokp/prebuilt/common/etc/backup.conf:system/etc/backup.conf
 
 # Signature compatibility validation
 PRODUCT_COPY_FILES += \
