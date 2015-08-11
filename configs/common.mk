@@ -287,6 +287,23 @@ endif
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.camera-sound=1
 
+ifndef CM_PLATFORM_REV
+  # For internal SDK revisions that are hotfixed/patched
+  # Reset after each CM_PLATFORM_SDK_VERSION release
+  # If you are doing a release and this is NOT 0, you are almost certainly doing it wrong
+  CM_PLATFORM_REV := 0
+endif
+
+# Include CM audio files
+include vendor/carbon/config/cm_audio.mk
+
+# Audio
+$(call inherit-product-if-exists, frameworks/base/data/sounds/AllAudio.mk)
+
+# CyanogenMod Platform Internal
+PRODUCT_PROPERTY_OVERRIDES += \
+  ro.aokp.build.version.plat.rev=$(CM_PLATFORM_REV)
+
 # common boot animation
 PRODUCT_COPY_FILES += \
     vendor/aokp/prebuilt/bootanimation/bootanimation-kiernan.zip:system/media/bootanimation-alt.zip
