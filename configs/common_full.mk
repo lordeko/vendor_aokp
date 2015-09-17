@@ -12,7 +12,6 @@ PRODUCT_PACKAGE_OVERLAYS += vendor/aokp/overlay/dictionaries
 
 # Optional AOKP packages
 PRODUCT_PACKAGES += \
-    CMResolver \
     CMSettingsProvider \
     Galaxy4 \
     HoloSpiralWallpaper \
