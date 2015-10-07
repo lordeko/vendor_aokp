@@ -132,7 +132,7 @@ PRODUCT_COPY_FILES += \
     vendor/aokp/configs/permissions/com.aokp.android.xml:system/etc/permissions/com.aokp.android.xml
 
 # T-Mobile theme engine
-include vendor/aokp/configs/themes_common.mk
+# include vendor/aokp/configs/themes_common.mk
 
 # Required AOKP packages
 PRODUCT_PACKAGES += \
@@ -158,12 +158,12 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     Launcher3 \
     Trebuchet \
-    AudioFX \
     CMWallpapers \
     CMFileManager \
     Eleven \
     LockClock \
     CMSettingsProvider
+#   AudioFX \
 
 # CM Hardware Abstraction Framework
 PRODUCT_PACKAGES += \
@@ -210,14 +210,14 @@ PRODUCT_PACKAGES += \
     rsync
 
 # Stagefright FFMPEG plugin
-PRODUCT_PACKAGES += \
-    libffmpeg_extractor \
-    libffmpeg_omx \
-    media_codecs_ffmpeg.xml
+#PRODUCT_PACKAGES += \
+#    libffmpeg_extractor \
+#    libffmpeg_omx \
+#    media_codecs_ffmpeg.xml
 
-PRODUCT_PROPERTY_OVERRIDES += \
-    media.sf.omx-plugin=libffmpeg_omx.so \
-    media.sf.extractor-plugin=libffmpeg_extractor.so
+#PRODUCT_PROPERTY_OVERRIDES += \
+#    media.sf.omx-plugin=libffmpeg_omx.so \
+#    media.sf.extractor-plugin=libffmpeg_extractor.so
 
 # TCM (TCP Connection Management)
 PRODUCT_PACKAGES += \
