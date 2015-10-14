@@ -302,7 +302,7 @@ ifndef CM_PLATFORM_REV
 endif
 
 # Include CM audio files
-include vendor/carbon/config/cm_audio.mk
+include vendor/aokp/configs/cm_audio.mk
 
 # Audio
 $(call inherit-product-if-exists, frameworks/base/data/sounds/AllAudio.mk)
