@@ -22,9 +22,7 @@ PRODUCT_PACKAGES += \
     PhaseBeam \
     PhotoPhase \
     PhotoTable \
-    SoundRecorder \
-    VisualizationWallpapers
-
+    SoundRecorder
 
 PRODUCT_PACKAGES += \
     VideoEditor \
