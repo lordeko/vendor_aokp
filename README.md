@@ -12,27 +12,27 @@ Initializing Repository
 
 Init core trees without any device/kernel/vendor :
 
-    $ repo init -u https://github.com/A0KP/platform_manifest.git -b mm
+    $ repo init -u https://github.com/MarshMallowKang/platform_manifest.git -b mm
 
-Init repo with all devices, kernels and vendors supported by A0KP :
+Init repo with all devices, kernels and vendors supported by AOKP :
 
-    $ repo init -u https://github.com/A0KP/platform_manifest.git -b mm -g all,kernel,device,vendor
+    $ repo init -u https://github.com/MarshMallowKang/platform_manifest.git -b mm -g all,kernel,device,vendor
 
 Init repo only for a particular device :
 
-    $ repo init -u https://github.com/A0KP/platform_manifest.git -b mm -g all,-notdefault,<devicename>,<vendorname>
+    $ repo init -u https://github.com/MarshMallowKang/platform_manifest.git -b mm -g all,-notdefault,<devicename>,<vendorname>
 
 for example, to init only trees needed to build mako :
 
-    $ repo init -u https://github.com/A0KP/platform_manifest.git -b mm -g all,-notdefault,mako,lge
+    $ repo init -u https://github.com/MarshMallowKang/platform_manifest.git -b mm -g all,-notdefault,mako,lge
 
 Init repo for multiple devices :
 
-    $ repo init -u https://github.com/A0KP/platform_manifest.git -b mm -g all,-notdefault,<devicename1>,<devicename2>,<devicename3>,<vendorname1>,<vendorname2>,<vendorname3>
+    $ repo init -u https://github.com/MarshMallowKang/platform_manifest.git -b mm -g all,-notdefault,<devicename1>,<devicename2>,<devicename3>,<vendorname1>,<vendorname2>,<vendorname3>
 
 for example, to init trees needed to build mako and flo :
 
-    $ repo init -u https://github.com/A0KP/platform_manifest.git -b mm -g all,-notdefault,mako,flo,lge,asus
+    $ repo init -u https://github.com/MarshMallowKang/platform_manifest.git -b mm -g all,-notdefault,mako,flo,lge,asus
 
 
 sync repo :
