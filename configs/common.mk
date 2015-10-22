@@ -96,14 +96,9 @@ PRODUCT_COPY_FILES += \
     vendor/aokp/prebuilt/common/etc/init.d/90userinit:system/etc/init.d/90userinit
 endif
 
-# CM-specific init file
+# AOKP-specific init file
 PRODUCT_COPY_FILES += \
     vendor/aokp/prebuilt/common/etc/init.local.rc:root/init.aokp.rc \
-
-# Bring in camera effects
-PRODUCT_COPY_FILES +=  \
-    vendor/aokp/prebuilt/common/media/LMprec_508.emd:system/media/LMprec_508.emd \
-    vendor/aokp/prebuilt/common/media/PFFprec_600.emd:system/media/PFFprec_600.emd
 
 # Installer
 PRODUCT_COPY_FILES += \
