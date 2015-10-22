@@ -147,8 +147,6 @@ PRODUCT_PACKAGES += \
 
 # Optional AOKP packages
 PRODUCT_PACKAGES += \
-    VoicePlus \
-    Basic \
     libemoji \
     Terminal
 
