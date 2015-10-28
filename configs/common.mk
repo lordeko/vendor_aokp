@@ -132,7 +132,7 @@ PRODUCT_COPY_FILES += \
     vendor/aokp/configs/permissions/com.aokp.android.xml:system/etc/permissions/com.aokp.android.xml
 
 # T-Mobile theme engine
-# include vendor/aokp/configs/themes_common.mk
+include vendor/aokp/configs/themes_common.mk
 
 # Required AOKP packages
 PRODUCT_PACKAGES += \
