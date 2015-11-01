@@ -158,12 +158,12 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     Launcher3 \
     Trebuchet \
+    AudioFX \
     CMWallpapers \
     CMFileManager \
     Eleven \
     LockClock \
     CMSettingsProvider
-#   AudioFX \
 
 # CM Hardware Abstraction Framework
 PRODUCT_PACKAGES += \
@@ -210,14 +210,14 @@ PRODUCT_PACKAGES += \
     rsync
 
 # Stagefright FFMPEG plugin
-#PRODUCT_PACKAGES += \
-#    libffmpeg_extractor \
-#    libffmpeg_omx \
-#    media_codecs_ffmpeg.xml
+PRODUCT_PACKAGES += \
+    libffmpeg_extractor \
+    libffmpeg_omx \
+    media_codecs_ffmpeg.xml
 
-#PRODUCT_PROPERTY_OVERRIDES += \
-#    media.sf.omx-plugin=libffmpeg_omx.so \
-#    media.sf.extractor-plugin=libffmpeg_extractor.so
+PRODUCT_PROPERTY_OVERRIDES += \
+    media.sf.omx-plugin=libffmpeg_omx.so \
+    media.sf.extractor-plugin=libffmpeg_extractor.so
 
 # TCM (TCP Connection Management)
 PRODUCT_PACKAGES += \
@@ -294,7 +294,7 @@ ifndef CM_PLATFORM_SDK_VERSION
   # the SDK are released.  It should only be incremented when the APIs for
   # the new release are frozen (so that developers don't write apps against
   # intermediate builds).
-  CM_PLATFORM_SDK_VERSION := 3
+  CM_PLATFORM_SDK_VERSION := 4
 endif
 
 # Camera shutter sound property
