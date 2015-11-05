@@ -147,14 +147,16 @@ PRODUCT_PACKAGES += \
 
 # Custom CM packages
 PRODUCT_PACKAGES += \
-    Launcher3 \
-    Trebuchet \
     AudioFX \
     CMWallpapers \
     CMFileManager \
+    CMSettingsProvider \
     Eleven \
+    ExactCalculator \
+    Launcher3 \
     LockClock \
-    CMSettingsProvider
+    Trebuchet
+
 
 # CM Hardware Abstraction Framework
 PRODUCT_PACKAGES += \
