@@ -34,8 +34,10 @@ PRODUCT_PACKAGES += \
 
 # Extra tools in AOKP
 PRODUCT_PACKAGES += \
+    7z \
     bzip2 \
     curl \
     unrar \
+    unzip \
     vim \
     zip
