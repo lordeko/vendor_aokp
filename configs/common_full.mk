@@ -35,8 +35,10 @@ PRODUCT_PACKAGES += \
 # Extra tools in AOKP
 PRODUCT_PACKAGES += \
     7z \
+    bash \
     bzip2 \
     curl \
+    powertop \
     unrar \
     unzip \
     vim \
