@@ -137,6 +137,7 @@ PRODUCT_PACKAGES += \
     libemoji \
     mGerrit \
     Microbes \
+    ROMControl \
     Stk \
     SwagPapers
 
