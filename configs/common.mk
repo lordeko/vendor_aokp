@@ -226,10 +226,8 @@ PRODUCT_PACKAGES += \
     su
 endif
 
-# SuperSU
-PRODUCT_COPY_FILES += \
-    vendor/aokp/prebuilt/common/UPDATE-SuperSU.zip:system/addon.d/UPDATE-SuperSU.zip \
-    vendor/aokp/prebuilt/common/etc/init.d/99SuperSUDaemon:system/etc/init.d/99SuperSUDaemon
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.sys.root_access=0
 
 PRODUCT_PACKAGE_OVERLAYS += vendor/aokp/overlay/common
 
