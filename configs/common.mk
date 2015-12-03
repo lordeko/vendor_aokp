@@ -1,5 +1,7 @@
 PRODUCT_BRAND ?= aokp
 
+SUPERUSER_EMBEDDED := true
+
 ifneq ($(TARGET_SCREEN_WIDTH) $(TARGET_SCREEN_HEIGHT),$(space))
 # determine the smaller dimension
 TARGET_BOOTANIMATION_SIZE := $(shell \
@@ -33,11 +35,9 @@ PRODUCT_BOOTANIMATION := vendor/aokp/prebuilt/bootanimation/$(TARGET_BOOTANIMATI
 endif
 endif
 
-# Common overlay
-PRODUCT_PACKAGE_OVERLAYS += vendor/aokp/overlay/common
-
 # Common dictionaries
 PRODUCT_PACKAGE_OVERLAYS += vendor/aokp/overlay/dictionaries
+PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
 
 ifeq ($(PRODUCT_GMS_CLIENTID_BASE),)
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -52,18 +52,18 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.url.legal=http://www.google.com/intl/%s/mobile/android/basic/phone-legal.html \
     ro.url.legal.android_privacy=http://www.google.com/intl/%s/mobile/android/basic/privacy.html \
     ro.com.android.wifi-watchlist=GoogleGuest \
-    ro.error.receiver.system.apps=com.google.android.feedback \
-    ro.com.google.locationfeatures=1 \
     ro.setupwizard.enterprise_mode=1 \
-    ro.kernel.android.checkjni=0 \
-    persist.sys.root_access=3
+    ro.com.android.dateformat=MM-dd-yyyy \
+    ro.com.android.dataroaming=false
 
 #SELinux
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.build.selinux=1
 
+ifneq ($(TARGET_BUILD_VARIANT),user)
 # Thank you, please drive thru!
 PRODUCT_PROPERTY_OVERRIDES += persist.sys.dun.override=0
+endif
 
 ifneq ($(TARGET_BUILD_VARIANT),eng)
 # Enable ADB authentication
@@ -158,6 +158,11 @@ PRODUCT_PACKAGES += \
     LockClock \
     Trebuchet
 
+# CM Platform Library
+PRODUCT_PACKAGES += \
+    org.cyanogenmod.platform-res \
+    org.cyanogenmod.platform \
+    org.cyanogenmod.platform.xml
 
 # CM Hardware Abstraction Framework
 PRODUCT_PACKAGES += \
@@ -227,19 +232,14 @@ PRODUCT_PACKAGES += \
 endif
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    persist.sys.root_access=0
+    persist.sys.root_access=3
 
+# Common overlay
 PRODUCT_PACKAGE_OVERLAYS += vendor/aokp/overlay/common
 
 PRODUCT_VERSION_MAJOR = 13
 PRODUCT_VERSION_MINOR = 0
 PRODUCT_VERSION_MAINTENANCE = 0-RC0
-
-# CM Platform Library
-PRODUCT_PACKAGES += \
-    org.cyanogenmod.platform-res \
-    org.cyanogenmod.platform \
-    org.cyanogenmod.platform.xml
 
 # Version information used on all builds
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_VERSION_TAGS=release-keys USER=android-build BUILD_UTC_DATE=$(shell date +"%s")
@@ -287,10 +287,6 @@ ifndef CM_PLATFORM_SDK_VERSION
   CM_PLATFORM_SDK_VERSION := 4
 endif
 
-# Camera shutter sound property
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.sys.camera-sound=1
-
 ifndef CM_PLATFORM_REV
   # For internal SDK revisions that are hotfixed/patched
   # Reset after each CM_PLATFORM_SDK_VERSION release
@@ -298,16 +294,16 @@ ifndef CM_PLATFORM_REV
   CM_PLATFORM_REV := 0
 endif
 
-# Include CM audio files
-include vendor/aokp/configs/cm_audio.mk
-
-# Audio
-$(call inherit-product-if-exists, frameworks/base/data/sounds/AllAudio.mk)
+# CyanogenMod Platform SDK Version
+PRODUCT_PROPERTY_OVERRIDES += \
+  ro.aokp.build.version.plat.sdk=$(CM_PLATFORM_SDK_VERSION)
 
 # CyanogenMod Platform Internal
 PRODUCT_PROPERTY_OVERRIDES += \
   ro.aokp.build.version.plat.rev=$(CM_PLATFORM_REV)
 
-# common boot animation
-PRODUCT_COPY_FILES += \
-    vendor/aokp/prebuilt/bootanimation/bootanimation-kiernan.zip:system/media/bootanimation-alt.zip
+-include $(WORKSPACE)/build_env/image-auto-bits.mk
+
+-include vendor/cyngn/product.mk
+
+$(call prepend-product-if-exists, vendor/extra/product.mk)
