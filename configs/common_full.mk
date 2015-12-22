@@ -22,6 +22,7 @@ PRODUCT_PACKAGES += \
     PhaseBeam \
     PhotoPhase \
     PhotoTable \
+    Screencast \
     SoundRecorder
 
 PRODUCT_PACKAGES += \
