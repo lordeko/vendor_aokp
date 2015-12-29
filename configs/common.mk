@@ -138,8 +138,7 @@ PRODUCT_PACKAGES += \
     mGerrit \
     Microbes \
     ROMControl \
-    Stk \
-    SwagPapers
+    Stk
 
 # Optional AOKP packages
 PRODUCT_PACKAGES += \
