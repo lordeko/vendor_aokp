@@ -23,7 +23,8 @@ PRODUCT_PACKAGES += \
     PhotoPhase \
     PhotoTable \
     Screencast \
-    SoundRecorder
+    SoundRecorder \
+    SwagPapers
 
 PRODUCT_PACKAGES += \
     VideoEditor \
