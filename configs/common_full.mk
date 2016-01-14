@@ -22,7 +22,9 @@ PRODUCT_PACKAGES += \
     PhaseBeam \
     PhotoPhase \
     PhotoTable \
-    SoundRecorder
+    Screencast \
+    SoundRecorder \
+    SwagPapers
 
 PRODUCT_PACKAGES += \
     VideoEditor \
@@ -35,6 +37,7 @@ PRODUCT_PACKAGES += \
 # Extra tools in AOKP
 PRODUCT_PACKAGES += \
     7z \
+    lib7z \
     bash \
     bzip2 \
     curl \
